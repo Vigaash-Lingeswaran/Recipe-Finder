@@ -6,15 +6,22 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <nav style = " padding-top: 80px; text-align: center;">
+        <a href = "ingredient.html" class ="nav-btn">
+            <span><strong>Ingredient Recipe Finder</strong></span>
+        </a>
+        <a href = "index.html" class ="nav-btn">
+            <span><strong>Recipe Finder</strong></span>
+        </a>
+    </nav>
     <div class="container">
-        <h1 style = "text-align: center" >Recipe Finder</h1>
-        <p style = "text-align: center">Enter your ingredients (separated by commas):</p>
+        <h1 style = "text-align: center; font-size: 3rem;">Recipe Finder 2.0</h1>
+        <p style = "text-align: center;font-size: 1.5rem;">Enter your ingredients (separated by commas):</p>
+        <div style = "display: grid; grid-template-columns: 1fr auto; gap: 10px; margin: 10px 0 6px;">
+            <input style = "padding: 12px 14px; border-radius: 12px; border: 1px solid #1F2937; background: #0F172A; color: var(--bg);outline: none;"type="text" id="ingredientInput" placeholder="e.g. egg, cheese, tomato">
+            <button style = "border: 1px solid #1F2937; background: #0F172A; color: #Fffdd0; padding: 10px 16px; border-radius: 12px; cursor: pointer; transition: transform .06s ease, opacity .2s ease;"onclick="findRecipe()">Find Recipe</button>
+        </div>
         <div id="result" class="result-box"></div>
-        <form id="searchForm" class="search" role="search" aria-label="Recipe search">
-            <label for="q" class="sr-only">Search recipes</label>
-            <input id="q" name="q" placeholder="Search ingredients (e.g., egg, cheese, tomato)" />
-            <button onclick="findRecipe()" class="btn primary">Search</button>
-        </form>
     </div>
     <script src="app.js"></script>
 </body>

@@ -188,3 +188,48 @@ h1 {
     clip: rect(0, 0, 0, 0);
     border: 0;
 }
+
+nav{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap: 12px;
+    padding: 14px 32px;
+    margin: 24px auto;
+    max-width: 840px;
+    border-radius: 14px;
+    font-family:-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+ }
+
+ nav a{
+
+    padding: 10px 20px;
+    border-radius: 32px;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+
+ }
+
+ .nav-btn {
+  position: relative;
+  top: 80%;
+  transform: translateY(-30%);
+  background-color: #00123A; 
+  color: white;
+  border: none;
+  padding: 10px 20px; 
+  cursor: pointer;
+  font-size: 18px;
+  border-radius: 8px; 
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: center center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+  background-color: #0F172A;
+  transform: scale(1.05);
+}
