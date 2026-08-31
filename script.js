@@ -1,4 +1,3 @@
-// ===== Recipe Finder (TheMealDB API) — Codeboid =====
 const API = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 const form = document.getElementById('searchForm');
@@ -76,7 +75,7 @@ function toCardHTML(m) {
     const cat = m.strCategory || 'Recipe';
     const youtube = m.strYoutube || '';
     const source = m.strSource || '';
-    const ing = ingredients(m).slice(0, 8); // show first ~8 for brevity
+    const ing = ingredients(m).slice(0, 8);
     const instr = (m.strInstructions || '').split('\n').filter(Boolean).slice(0, 2).join(' ');
     const safeTitle = escapeHTML(title);
 
