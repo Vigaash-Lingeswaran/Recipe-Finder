@@ -231,472 +231,208 @@
     <head>
         <meta charset = "UTF-8">
         <meta name = "viewport" content = "width=device-width, initital-scale =1.0">
-        <title>Recipe Finder</title>
-        <link rel = "stylesheet" href = "styles.css">
-    </head>
-    <body>
-        <div class = "container">
-            <h1>Find Your Recipe</h1>
-            <div class = "search-box">
-                <input type = "text" id = "search-input" placeholder="Search for Any Meal...">
-                <button id = "search-button">Search</button>
-            </div>
-            <div> </div>
-            
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset = "UTF-8">
-        <meta name = "viewport" content = "width=device-width, initital-scale =1.0">
-        <title>Recipe Finder</title>
-        <link rel = "stylesheet" href = "styles.css">
-    </head>
-    <body>
-        <div class = "container">
-            <h1>Find Your Recipe</h1>
-            <div class = "search-box">
-                <input type = "text" id = "search-input" placeholder="Search for Any Meal...">
-                <button id = "search-button">Search</button>
-            </div>
-            <div id = "result" class = "result-grid"></div>
-        <<!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+        <title>Rconst searchBtn = document.getElementById('search-btn');
+const ingredientInput = document.getElementById('ingredient-input');
+const API_KEY = 'a1f96be53b65423baa17a7c200c5bbd6'; 
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+const searchBtn = document.getElementById('search-btn');
+const inputField = document.getElementById('ingredient-input');
+const resultsGrid = document.getElementById('results-grid');
+const modal = document.getElementById('recipe-modal');
+const closeBtn = document.getElementById('close-btn');
+const modalTitle = document.getElementById('modal-title');
+const modalImg = document.getElementById('modal-img');
+const modalInstructions = document.getElementById('modal-instructions');
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 1. Fixed Search Event Listener
+searchBtn.addEventListener('click', async () => {
+  const ingredients = inputField.value.trim();
+  if (!ingredients) return alert('Please enter ingredients!');
+  
+  // FIXED: Added api. prefix, proper pathway, '?' operator, and '$' to the variable
+  const url = `https://spoonacular.com{encodeURIComponent(ingredients)}&number=12&apiKey=${API_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    const recipes = await res.json();
+    displayRecipes(recipes);
+  } catch (err) {
+    console.error('Error fetching recipes:', err);
+  }
+});
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 2. Display Recipe Cards
+function displayRecipes(recipes) {
+  resultsGrid.innerHTML = '';
+  
+  // Safety check: Ensure the response is an array
+  if (!Array.isArray(recipes) || recipes.length === 0) {
+    resultsGrid.innerHTML = '<p>No recipes found.</p>';
+    return;
+  }
+  
+  recipes.forEach(recipe => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+    card.innerHTML = `
+      <img src="${recipe.image}" alt="${recipe.title}">
+      <h3>${recipe.title}</h3>
+      <p>Used Ingredients: ${recipe.usedIngredientCount}</p>
+    `;
+    card.addEventListener('click', () => fetchRecipeDetails(recipe.id));
+    resultsGrid.appendChild(card);
+  });
+}
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 3. Fixed Recipe Details Fetching
+async function fetchRecipeDetails(id) {
+  // FIXED: Added api. prefix, proper /recipes/ directory, and '$' to the id variable
+  const url = `https://spoonacular.com{id}/information?apiKey=${API_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    modalTitle.innerText = data.title;
+    modalImg.src = data.image;
+    modalInstructions.innerHTML = '';
+    
+    if (data.analyzedInstructions && data.analyzedInstructions.length > 0) {
+      data.analyzedInstructions[0].steps.forEach(step => {
+        const li = document.createElement('li');
+        li.innerText = step.step;
+        modalInstructions.appendChild(li); // Appends clean list items
+      });
+    } else {
+      modalInstructions.innerHTML = '<li>Instructions not available directly. Check source URL.</li>';
+    }
+    
+    modal.style.display = 'block';
+  } catch (err) {
+    console.error('Error fetching details:', err);
+  }
+}
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 4. Modal Window Controls
+closeBtn.addEventListener('click', () => modal.style.display = 'none');
+window.addEventListener('click', (e) => {
+  if (e.target === modal) modal.style.display = 'none';
+});
+        const API_KEY = 'a1f96be53b65423baa17a7c200c5bbd6'; 
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+const searchBtn = document.getElementById('search-btn');
+const inputField = document.getElementById('ingredient-input');
+const resultsGrid = document.getElementById('results-grid');
+const modal = document.getElementById('recipe-modal');
+const closeBtn = document.getElementById('close-btn');
+const modalTitle = document.getElementById('modal-title');
+const modalImg = document.getElementById('modal-img');
+const modalInstructions = document.getElementById('modal-instructions');
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 1. Fixed Search Event Listener
+searchBtn.addEventListener('click', async () => {
+  const ingredients = inputField.value.trim();
+  if (!ingredients) return alert('Please enter ingredients!');
+  
+  // FIXED: Added api. prefix, proper pathway, '?' operator, and '$' to the variable
+  const url = `https://spoonacular.com{encodeURIComponent(ingredients)}&number=12&apiKey=${API_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    const recipes = await res.json();
+    displayRecipes(recipes);
+  } catch (err) {
+    console.error('Error fetching recipes:', err);
+  }
+});
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 2. Display Recipe Cards
+function displayRecipes(recipes) {
+  resultsGrid.innerHTML = '';
+  
+  // Safety check: Ensure the response is an array
+  if (!Array.isArray(recipes) || recipes.length === 0) {
+    resultsGrid.innerHTML = '<p>No recipes found.</p>';
+    return;
+  }
+  
+  recipes.forEach(recipe => {
+    const card = document.createElement('div');
+    card.className = 'recipe-card';
+    card.innerHTML = `
+      <img src="${recipe.image}" alt="${recipe.title}">
+      <h3>${recipe.title}</h3>
+      <p>Used Ingredients: ${recipe.usedIngredientCount}</p>
+    `;
+    card.addEventListener('click', () => fetchRecipeDetails(recipe.id));
+    resultsGrid.appendChild(card);
+  });
+}
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 3. Fixed Recipe Details Fetching
+async function fetchRecipeDetails(id) {
+  // FIXED: Added api. prefix, proper /recipes/ directory, and '$' to the id variable
+  const url = `https://spoonacular.com{id}/information?apiKey=${API_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    
+    modalTitle.innerText = data.title;
+    modalImg.src = data.image;
+    modalInstructions.innerHTML = '';
+    
+    if (data.analyzedInstructions && data.analyzedInstructions.length > 0) {
+      data.analyzedInstructions[0].steps.forEach(step => {
+        const li = document.createElement('li');
+        li.innerText = step.step;
+        modalInstructions.appendChild(li); // Appends clean list items
+      });
+    } else {
+      modalInstructions.innerHTML = '<li>Instructions not available directly. Check source URL.</li>';
+    }
+    
+    modal.style.display = 'block';
+  } catch (err) {
+    console.error('Error fetching details:', err);
+  }
+}
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 4. Modal Window Controls
+closeBtn.addEventListener('click', () => modal.style.display = 'none');
+window.addEventListener('click', (e) => {
+  if (e.target === modal) modal.style.display = 'none';
+});
+        const API_KEY = 'a1f96be53b65423baa17a7c200c5bbd6'; 
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+const searchBtn = document.getElementById('search-btn');
+const inputField = document.getElementById('ingredient-input');
+const resultsGrid = document.getElementById('results-grid');
+const modal = document.getElementById('recipe-modal');
+const closeBtn = document.getElementById('close-btn');
+const modalTitle = document.getElementById('modal-title');
+const modalImg = document.getElementById('modal-img');
+const modalInstructions = document.getElementById('modal-instructions');
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
+// 1. Fixed Search Event Listener
+searchBtn.addEventListener('click', async () => {
+  const ingredients = inputField.value.trim();
+  if (!ingredients) return alert('Please enter ingredients!');
+  
+  // FIXED: Added api. prefix, proper pathway, '?' operator, and '$' to the variable
+  const url = `https://spoonacular.com{encodeURIComponent(ingredients)}&number=12&apiKey=${API_KEY}`;
+  
+  try {
+    const res = await fetch(url);
+    const recipes = await res.json();
+    displayRecipes(recipes);
+  } catch (err) {
+    console.error('Error fetching recipes:', err);
+  }
+});
 
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</html><!DOCTYPE html>
-<html lang = "en">
-    <head>
-    </head>
-    <body>
-        <div>
-            <h1>
-
-            </h1>
-        </div>
-    </body>
-</ht
+// 2. Display Recipe Cards
+function displayRecipes(recipes) {
+  resultsGrid.innerHTML = '';
+  
+  // Safety check: Ensure the response is an array

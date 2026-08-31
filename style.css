@@ -1,10 +1,10 @@
 :root {
     --teal-1: #0EB4A5;
     --teal-2: #00123A;
-    --bg: #0D1117;
+    --bg: #FFFdd0;
     --card: #0B1426;
     --line: #1F2937;
-    --fg: #E2E8F0;
+    --fg: #00123A;
     --muted: #94A3B8;
     --accent: linear-gradient(135deg, var(--teal-1), #0A7C77);
     --radius: 16px;
@@ -66,7 +66,7 @@ h1 {
     border-radius: 12px;
     border: 1px solid var(--line);
     background: #0F172A;
-    color: var(--fg);
+    color: var(--bg);
     outline: none;
 }
 
