@@ -261,8 +261,8 @@ function findRecipe() {
       const matchCount = recipe.ingredients.filter(ing => userIngredients.includes(ing.toLowerCase())).length;
       return { ...recipe, matchCount };
     })
-    .filter(recipe => recipe.matchCount > 0) // Only keep recipes with matches
-    .sort((a, b) => b.matchCount - a.matchCount); // Sort by highest matches first
+    .filter(recipe => recipe.matchCount > 0)
+    .sort((a, b) => b.matchCount - a.matchCount);
 
   if (matchingRecipes.length > 0) {
     resultDiv.innerHTML = matchingRecipes.map(recipe => {
